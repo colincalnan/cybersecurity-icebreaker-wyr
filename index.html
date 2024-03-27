@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity Would You Rather</title>
+<style>
+  body {
+    background-color: black;
+    color: white;
+    font-family: 'Arial Black', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  .container {
+    text-align: center;
+  }
+  .question {
+    font-size: 4em;
+    margin: 2em;
+  }
+  button {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 1em;
+    margin: 1em;
+    cursor: pointer;
+  }
+
+  button#prev {
+    font-size: small;
+    font-size: 0.5em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div id="question" class="question">Would you rather...</div>
+  <button id="prev">Prev</button>
+  <button id="next">Next</button>
+</div>
+
+<script>
+  let questions = [
+    "Would you rather deal with a DDoS attack on your main server or a ransomware attack on your backup data?",
+    "Would you rather explain the concept of blockchain to a 5-year-old or to your company's CEO who thinks it's a new workout trend?",
+    "Would you rather have your security team consist entirely of former hackers or AI robots programmed for cybersecurity?",
+    "Would you rather go back in time to prevent the creation of the internet or jump forward to a time where quantum encryption is the norm?",
+    "Would you rather manually check 10,000 lines of code for vulnerabilities or let an untested AI do it for you?",
+    "Would you rather have your personal browsing history leaked or have every email you've ever sent made public?",
+    "Would you rather fight off a cyber attack from a nation-state or from an unknown entity with superior technology?",
+    "Would you rather have a secure system that's extremely user-unfriendly or a user-friendly system with mediocre security?",
+    "Would you rather work on strengthening your firewall or spend all your resources on educating employees about phishing?",
+    "Would you rather permanently lose access to your email or to all your social media accounts?",
+    "Would you rather uncover a major vulnerability in your company's software on your first day or on the day before you retire?",
+    "Would you rather have the ability to instantly detect any malware or have the power to fix any vulnerability in seconds?",
+    "Would you rather deal with a zombie apocalypse or a world where all cybersecurity defenses have failed?",
+    "Would you rather have your smart home hacked, controlling every device at will, or have your car's computer system hacked while driving?",
+    "Would you rather live in a world without passwords or a world where you have to change passwords every day?",
+    "Would you rather be known as the person who accidentally introduced a virus into your network or the one who saved the day by stopping a major breach?",
+    "Would you rather have a guaranteed safe but anonymous online presence or be famous online but with constant security threats?",
+    "Would you rather fight one horse-sized duck in a cybersecurity battle or 100 duck-sized horses?",
+    "Would you rather have the skills to hack into any system in the world or the ability to make any system impenetrable?",
+    "Would you rather spend a day without any cybersecurity measures in place or a week with the most restrictive security protocols affecting every task?",
+    "Would you rather have every digital action you take monitored by a security AI or have no digital security monitoring at all?",
+    "Would you rather only use public Wi-Fi for the rest of your life or never use the internet again?",
+    "Would you rather have the job of patching software vulnerabilities manually for an entire city or be the sole IT support for your entire family at every family gathering?",
+    "Would you rather have to use a fax machine for all your communications or have all your texts read aloud by a voice assistant?",
+    "Would you rather have a digital assistant that's overly paranoid about security or one that's too lax and forgets to log out?",
+    "Would you rather navigate a maze designed by a hacker to retrieve stolen data or negotiate with the hacker directly?",
+    "Would you rather have your online identity mistaken for a notorious hacker or a famous celebrity?",
+    "Would you rather try to explain what you do for a living to a very curious 90-year-old or to a group of kindergarteners?",
+    "Would you rather have to decrypt a message from an alien civilization or try to explain email spam to them?",
+    "Would you rather live in a world where every cybersecurity measure is narrated by your favorite movie star or have your daily work life scored by your favorite band?",
+    "Would you rather be stuck in a Groundhog Day loop solving the same cybersecurity issue or face a new, unknown cyber threat every day?",
+    "Would you rather be stuck in a Groundhog Day loop solving the same cybersecurity issue or face a new, unknown cyber threat every day?",
+    "Would you rather have to deal with securing a network that still uses Windows XP for all its operations or try to explain to your grandparents the importance of not clicking on every email link they receive?",
+    "Would you rather try to decrypt a message encrypted with a quantum computer or have to use only Morse code for all your digital communications for a month?",
+    "Would you rather be a cybersecurity expert in a world where every device is connected to the internet or live in a tech-free world but with no modern conveniences?",
+    "Would you rather have your daily activities monitored by a highly intelligent but benevolent AI or have complete digital privacy but no access to modern technology?",
+    "Would you rather fight off an army of sentient spam emails come to life or try to negotiate peace with a network of rogue smart fridges?",
+    "Would you rather have the power to instantly patch any software vulnerability you touch or be able to communicate with computers using only your thoughts?",
+    "Would you rather live in a dystopian future where all cybersecurity is managed by a central AI overlord or in a chaotic world where every individual is responsible for their own digital security with no rules?",
+    "Would you rather go undercover in a hacker collective to gather intelligence or lead a high-profile team tasked with defending against a global cyber threat?",
+    "Would you rather have to manually sort through all the world's spam emails for a week or have every digital action you take turned into a public livestream?",
+    "Would you rather be the only person left who knows how to use a keyboard and mouse in an advanced voice-controlled tech world or be the only one without the knowledge of how to use voice commands in the same world?",
+    "Would you rather have to recover data from a device submerged in coffee or from a device that's been in a microwave for five seconds?",
+    "Would you rather deal with a security breach on Black Friday or find a critical vulnerability in your system on Christmas Eve?",
+    "Would you rather have your security protocols designed by a genius with no practical experience or by a seasoned professional who ignores new trends?",
+    "Would you rather train a team of novices in the art of cybersecurity from scratch or try to change the bad habits of experienced but complacent experts?",
+    "Would you rather have unlimited budget for cybersecurity tools but only novice staff or have a team of experts with severely limited resources?",
+    "Would you rather go back to using only wired internet connections or have wireless connections but with a 50% chance of intercept and data breach?",
+    "Would you rather have a personal AI assistant that's overly cautious about security threats or one that's too adventurous and bypasses protocols for efficiency?",
+    "Would you rather manually patch a critical security flaw under a tight deadline or have to explain to your non-technical boss why the flaw is significant?",
+    "Would you rather have to use a public computer for all your personal banking or use your personal device but with a highly restrictive corporate firewall?",
+    "Would you rather be famous in the cybersecurity community but constantly targeted by hackers or be completely anonymous but with no recognition for your work?",
+    "Would you rather fight against a sophisticated AI that's trying to breach your systems or try to outsmart a cunning human hacker?",
+    "Would you rather have the job of securing the internet of things in everyone's homes or securing the digital infrastructure of a small country?",
+    "Would you rather have to disclose a data breach to affected users personally or explain to the media how the breach occurred and what data was compromised?",
+    "Would you rather work in a world where all cybersecurity threats are known and predictable or in one where new, unknown threats emerge daily?",
+    "Would you rather have cybersecurity tools with the most advanced technology but difficult user interfaces or user-friendly tools that are less advanced?",
+    "Would you rather have to recover from a catastrophic data loss with no backups available or try to mitigate a viral false alarm about a non-existent data breach?",
+    "Would you rather live in a digital utopia where cybersecurity threats don’t exist or in a dystopia where overcoming such threats is a daily challenge but makes you a hero?",
+    "Would you rather have to deal with cybersecurity in a world where every message is public or in a world where every communication is encrypted but keys are easily lost?",
+    "Would you rather be able to solve any cybersecurity problem by thinking about it or have the power to foresee cybersecurity challenges before they happen?",
+    "Would you rather have your online activity monitored by a well-intentioned but invasive security program or have complete privacy but no protection against online threats?"
+  ];
+
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+  }
+
+  // Shuffle questions at the start
+  shuffleArray(questions);
+
+  let currentQuestionIndex = 0;
+  const questionElement = document.getElementById('question');
+  const nextButton = document.getElementById('next');
+
+  function updateQuestion() {
+    if (currentQuestionIndex < questions.length) {
+      questionElement.textContent = questions[currentQuestionIndex++];
+    } else {
+      questionElement.textContent = "No more questions. Start again?";
+      currentQuestionIndex = 0; // Reset for a potential restart
+      shuffleArray(questions); // Optionally reshuffle for restart
+    }
+  }
+
+  nextButton.addEventListener('click', updateQuestion);
+
+  // Initialize with the first question
+  updateQuestion();
+
+  document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 39) { // 39 is the key code for the right arrow key
+      updateQuestion();
+    }
+  });
+
+</script>
+</body>
+</html>
